@@ -7,12 +7,13 @@
 
 import 'dart:io';
 
+import 'package:daangn_ui/common/theme/custom_theme.dart';
+import 'package:daangn_ui/common/theme/custom_theme_app.dart';
 import 'package:fast_app_base/app.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/data/preference/app_preferences.dart';
 import 'package:fast_app_base/common/language/language.dart';
-import 'package:fast_app_base/common/theme/custom_theme.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:isar/isar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -25,6 +26,11 @@ void main() {
     await Isar.initializeIsarCore(download: true);
     await EasyLocalization.ensureInitialized();
     await AppPreferences.init();
+    CustomThemeApp.init(saveThemeFunction: (value){
+      if (kDebugMode) {
+        print('${value.name} saved');
+      }
+    });
   });
 
   testWidgets('앱 실행 및 기본 세팅 확인', (WidgetTester tester) async {

@@ -1,3 +1,5 @@
+import 'package:daangn_ui/common/theme/custom_theme.dart';
+import 'package:daangn_ui/widget/w_mode_switch.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:fast_app_base/screen/opensource/s_opensource.dart';
 import 'package:flutter/foundation.dart';
@@ -9,8 +11,6 @@ import 'package:simple_shadow/simple_shadow.dart';
 import '../../../screen/dialog/d_message.dart';
 import '../../common/common.dart';
 import '../../common/language/language.dart';
-import '../../common/theme/theme_util.dart';
-import '../../common/widget/w_mode_switch.dart';
 
 class MenuDrawer extends StatefulWidget {
   static const minHeightForScrollView = 380;
@@ -112,7 +112,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
             child: ModeSwitch(
               value: context.isDarkMode,
               onChanged: (value) {
-                ThemeUtil.toggleTheme(context);
+                context.changeTheme(value? CustomTheme.light: CustomTheme.dark);
               },
               height: 30,
               activeThumbImage: Image.asset('$basePath/darkmode/moon.png'),
@@ -144,10 +144,6 @@ class _MenuDrawerState extends State<MenuDrawer> {
         ],
       ),
     );
-  }
-
-  void toggleTheme() {
-    ThemeUtil.toggleTheme(context);
   }
 
   void closeDrawer(BuildContext context) {
